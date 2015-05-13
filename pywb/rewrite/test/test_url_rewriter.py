@@ -63,19 +63,19 @@
 'localhost:8080/20101226101112/http:\\\\/\\\\/some-other-site.com'
 
 >>> do_rewrite(r'//some-other-site.com', '20101226101112/http://example.com/index.html', 'localhost:8080/')
-'localhost:8080/20101226101112/http://some-other-site.com'
+'localhost:8080/20101226101112///some-other-site.com'
 
 >>> do_rewrite(r'\/\/some-other-site.com', '20101226101112/http://example.com/index.html', 'localhost:8080/')
-'localhost:8080/20101226101112/http:\\\\/\\\\/some-other-site.com'
+'localhost:8080/20101226101112/\\\\/\\\\/some-other-site.com'
 
->>> do_rewrite(r'\\/\\/some-other-site.com', '20101226101112/http://example.com/index.html', 'localhost:8080/')
-'localhost:8080/20101226101112/http:\\\\/\\\\/some-other-site.com'
-
->>> do_rewrite(r'http:\/\/some-other-site.com', '20101226101112/http://example.com/index.html', 'localhost:8080/')
-'localhost:8080/20101226101112/http:\\\\/\\\\/some-other-site.com'
+>>> do_rewrite(r'\\/\\/some-other-site.com', '20101226101112/http://example.com/index.html', 'http://localhost:8080/')
+'//localhost:8080/20101226101112/\\\\/\\\\/some-other-site.com'
 
 >>> do_rewrite(r'http:\/\/some-other-site.com', '20101226101112/http://example.com/index.html', 'localhost:8080/')
 'localhost:8080/20101226101112/http:\\\\/\\\\/some-other-site.com'
+
+>>> do_rewrite(r'https:\/\/some-other-site.com', '20101226101112/http://example.com/index.html', 'http://localhost:8080/')
+'http://localhost:8080/20101226101112/https:\\\\/\\\\/some-other-site.com'
 
 >>> do_rewrite('../../other.html', '2020/http://example.com/index.html', '/')
 '/2020/http://example.com/other.html'

@@ -51,9 +51,11 @@ class UrlRewriter(object):
 
         is_abs = url.startswith(self.PROTOCOLS)
 
+        scheme_rel = False
         if url.startswith(self.REL_SCHEME):
             is_abs = True
-            url = 'http:' + url
+            scheme_rel = True
+            #url = 'http:' + url
 
         # optimize: join if not absolute url, otherwise just use as is
         if not is_abs:
@@ -65,6 +67,9 @@ class UrlRewriter(object):
             mod = wburl.mod
 
         final_url = self.prefix + wburl.to_str(mod=mod, url=new_url)
+        if scheme_rel and self.prefix.startswith(self.PROTOCOLS):
+            final_url = final_url.split(':', 1)[1]
+
         return final_url
 
     def get_new_url(self, **kwargs):
